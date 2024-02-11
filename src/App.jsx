@@ -8,10 +8,14 @@ function App() {
 	const [changeQuestion, setChangeQuestion] = useState(0);
 	const [handleHeading, setHandleHeading] = useState(1);
 	const [showSummary, setShowSummary] = useState(false);
+	const [userAnswers, setUserAnswers] = useState([]);
 
-	function nextQuestion() {
+	function nextQuestion(e) {
+		const userAnswer = e.target.textContent;
+		setUserAnswers((prevUserAnswer) => [...prevUserAnswer, userAnswer]);
 		setChangeQuestion((prevQuestion) => prevQuestion + 1);
 		setHandleHeading((prevHeading) => prevHeading + 1);
+		
 
 		if (handleHeading === 5) {
 			setShowSummary(true);
@@ -32,7 +36,7 @@ function App() {
 						onClick={nextQuestion}
 					/>
 				)}
-				{showSummary && <ResultSummary />}
+				{showSummary && <ResultSummary userAnswers={userAnswers} />}
 			</div>
 		</>
 	);

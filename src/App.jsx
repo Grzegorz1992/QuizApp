@@ -4,6 +4,8 @@ import { Questions } from "./utils/Questions";
 import styles from "./App.module.css";
 import { ResultSummary } from "./components/ResultSummary/ResultSummary";
 
+const correctAnswers = ["ryż", "azot", "dyni", "golf", "średniowieczem"];
+
 function App() {
 	const [changeQuestion, setChangeQuestion] = useState(0);
 	const [handleHeading, setHandleHeading] = useState(1);
@@ -15,7 +17,7 @@ function App() {
 		setUserAnswers((prevUserAnswer) => [...prevUserAnswer, userAnswer]);
 		setChangeQuestion((prevQuestion) => prevQuestion + 1);
 		setHandleHeading((prevHeading) => prevHeading + 1);
-		
+		console.log(userAnswers);
 
 		if (handleHeading === 5) {
 			setShowSummary(true);
@@ -36,7 +38,7 @@ function App() {
 						onClick={nextQuestion}
 					/>
 				)}
-				{showSummary && <ResultSummary userAnswers={userAnswers} />}
+				{showSummary && <ResultSummary userAnswers={userAnswers} correctAnswers={correctAnswers} />}
 			</div>
 		</>
 	);

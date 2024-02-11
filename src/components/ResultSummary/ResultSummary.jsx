@@ -1,46 +1,62 @@
 import styles from "./ResultSummary.module.css";
+import { Summary } from "../Summary/Summary";
+import { Questions } from "../../utils/Questions";
 
-export function ResultSummary({ userAnswers, className, correctAnswers }) {
+export function ResultSummary({ userAnswers, correctAnswers }) {
 	return (
 		<div className={styles.container}>
 			<h2>Podsumowanie</h2>
 			<p>Twój wynik to:</p>
-			<div className={styles.summary}>
-				<p>Pytanie 1: Co jest głównym składnikiem risotto?</p>
-				<p className={className}> Twoja odpowiedź: {userAnswers[0]}</p>
-				<p>
-					Poprawna odpowiedź: <span className={styles.correctAnswer}>{correctAnswers[0]}</span>
-				</p>
-			</div>
-			<div className={styles.summary}>
-				<p>Pytanie 2: Co jest głównym składnikiem ziemskiej atmosfery?</p>
-				<p className={className}> Twoja odpowiedź: {userAnswers[1]}</p>
-				<p>
-					Poprawna odpowiedź: <span className={styles.correctAnswer}>{correctAnswers[1]}</span>
-				</p>
-			</div>
-			<div className={styles.summary}>
-				<p>Pytanie 3: Hokkaido to jedna z popularnych odmian?</p>
-				<p className={className}> Twoja odpowiedź: {userAnswers[2]}</p>
-				<p>
-					Poprawna odpowiedź: <span className={styles.correctAnswer}>{correctAnswers[2]}</span>
-				</p>
-			</div>
-			<div className={styles.summary}>
-				<p>Pytanie 4: Jaką dyscypline uprawiał Tiger Woods?</p>
-				<p className={className}> Twoja odpowiedź: {userAnswers[3]}</p>
-				<p>
-					Poprawna odpowiedź: <span className={styles.correctAnswer}>{correctAnswers[3]}</span>
-				</p>
-			</div>
-			<div className={styles.summary}>
-				<p>Pytanie 5: Którą epoką historyczną zajmuje się mediewistyka?</p>
-				<p className={className}> Twoja odpowiedź: {userAnswers[4]}</p>
-				<p>
-					Poprawna odpowiedź:{" "}
-					<span className={styles.correctAnswer}>{correctAnswers[4]}</span>
-				</p>
-			</div>
+			<Summary
+				question={Questions[0].question}
+				className={
+					userAnswers[0] === correctAnswers[0]
+						? styles.correctAnswer
+						: styles.wrongAnswer
+				}
+				userAnswers={userAnswers[0]}
+				correctAnswers={correctAnswers[0]}
+			/>
+			<Summary
+				question={Questions[1].question}
+				className={
+					userAnswers[1] === correctAnswers[1]
+						? styles.correctAnswer
+						: styles.wrongAnswer
+				}
+				userAnswers={userAnswers[1]}
+				correctAnswers={correctAnswers[1]}
+			/>
+			<Summary
+				question={Questions[2].question}
+				className={
+					userAnswers[2] === correctAnswers[2]
+						? styles.correctAnswer
+						: styles.wrongAnswer
+				}
+				userAnswers={userAnswers[2]}
+				correctAnswers={correctAnswers[2]}
+			/>
+			<Summary
+				question={Questions[3].question}
+				className={
+					userAnswers[3] === correctAnswers[3]
+						? styles.correctAnswer
+						: styles.wrongAnswer
+				}
+				userAnswers={userAnswers[3]}
+				correctAnswers={correctAnswers[3]}
+			/>
+			<Summary
+				question={Questions[4].question}
+				className={
+					userAnswers[4] === correctAnswers[4]
+						? styles.correctAnswer
+						: styles.wrongAnswer
+				}
+				userAnswers={userAnswers[4]}
+				correctAnswers={correctAnswers[4]}
+			/>
 		</div>
 	);
 }

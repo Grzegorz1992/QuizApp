@@ -1,28 +1,28 @@
 .container {
-	width: 50%;
 	padding: 2rem;
-	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 	background-color: #f2efe5;
+	width: 50%;
 	border-radius: 12px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .answersBox {
-	max-width: 400px;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	padding: 1rem;
+	max-width: 400px;
 }
 
 button {
-	border-radius: 12px;
-	border: none;
-	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-	width: max-content;
+	color: white;
+	background-color: #4c4b4b;
 	padding: 1rem;
 	padding-right: 2rem;
-	background-color: #4c4b4b;
-	color: white;
+	width: max-content;
 	font-size: 1.4rem;
+	border: none;
+	border-radius: 12px;
+	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 	transition: all 0.3s;
     cursor: pointer;
 

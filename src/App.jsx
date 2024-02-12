@@ -3,6 +3,7 @@ import { Question } from "./components/Question/Question";
 import { Questions } from "./utils/Questions";
 import styles from "./App.module.css";
 import { ResultSummary } from "./components/ResultSummary/ResultSummary";
+import { Form } from "./components/Form/Form";
 
 const correctAnswers = ["ryż", "azot", "dyni", "golf", "średniowieczem"];
 
@@ -12,7 +13,7 @@ function App() {
 	const [showSummary, setShowSummary] = useState(false);
 	const [userAnswers, setUserAnswers] = useState([]);
 	const [userScore, setUserScore] = useState(0);
-	const [newQuestions, setNewQuestions] = useState(Questions);
+	// const [newQuestions, setNewQuestions] = useState(Questions);
 
 	function nextQuestion(e) {
 		const userAnswer = e.target.textContent;
@@ -31,26 +32,26 @@ function App() {
 		}
 	}
 
-	function addQuestion(
-		newQuestion,
-		answerOne,
-		answerTwo,
-		answerThree,
-		answerFour,
-		answerFive
-	) {
-		setNewQuestions((prevQuestions) => [
-			...prevQuestions,
-			{
-				question: newQuestion,
-				answerOne: answerOne,
-				answerTwo: answerTwo,
-				answerThree: answerThree,
-				answerFour: answerFour,
-				answerFive: answerFive,
-			},
-		]);
-	}
+	// function addQuestion(
+	// 	newQuestion,
+	// 	answerOne,
+	// 	answerTwo,
+	// 	answerThree,
+	// 	answerFour,
+	// 	answerFive
+	// ) {
+	// 	setNewQuestions((prevQuestions) => [
+	// 		...prevQuestions,
+	// 		{
+	// 			question: newQuestion,
+	// 			answerOne: answerOne,
+	// 			answerTwo: answerTwo,
+	// 			answerThree: answerThree,
+	// 			answerFour: answerFour,
+	// 			answerFive: answerFive,
+	// 		},
+	// 	]);
+	// }
 
 	return (
 		<>
@@ -74,12 +75,7 @@ function App() {
 					/>
 				)}
 			</div>
-			<div>
-				<input type="text" />
-				<input type="text" />
-				<input type="text" />
-				<input type="text" />
-			</div>
+			<Form />
 		</>
 	);
 }

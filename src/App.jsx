@@ -12,6 +12,7 @@ function App() {
 	const [showSummary, setShowSummary] = useState(false);
 	const [userAnswers, setUserAnswers] = useState([]);
 	const [userScore, setUserScore] = useState(0);
+	const [newQuestions, setNewQuestions] = useState(Questions);
 
 	function nextQuestion(e) {
 		const userAnswer = e.target.textContent;
@@ -28,6 +29,27 @@ function App() {
 		if (isCorrectAnswer) {
 			setUserScore((prevScore) => prevScore + 1);
 		}
+	}
+
+	function addQuestion(
+		newQuestion,
+		answerOne,
+		answerTwo,
+		answerThree,
+		answerFour,
+		answerFive
+	) {
+		setNewQuestions((prevQuestions) => [
+			...prevQuestions,
+			{
+				question: newQuestion,
+				answerOne: answerOne,
+				answerTwo: answerTwo,
+				answerThree: answerThree,
+				answerFour: answerFour,
+				answerFive: answerFive,
+			},
+		]);
 	}
 
 	return (
@@ -51,6 +73,12 @@ function App() {
 						score={userScore}
 					/>
 				)}
+			</div>
+			<div>
+				<input type="text" />
+				<input type="text" />
+				<input type="text" />
+				<input type="text" />
 			</div>
 		</>
 	);

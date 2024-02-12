@@ -2,17 +2,21 @@ import styles from "./ResultSummary.module.css";
 import { Summary } from "../Summary/Summary";
 import { Questions } from "../../utils/Questions";
 
-export function ResultSummary({ userAnswers, correctAnswers }) {
+
+export function ResultSummary({ userAnswers, correctAnswers, score }) {
+
+
 	return (
 		<div className={styles.container}>
 			<h2>Podsumowanie</h2>
-			<p>Twój wynik to:</p>
+			<p>Twój wynik to: {score}</p>
 			<Summary
 				question={Questions[0].question}
 				className={
 					userAnswers[0] === correctAnswers[0]
 						? styles.correctAnswer
 						: styles.wrongAnswer
+						
 				}
 				userAnswers={userAnswers[0]}
 				correctAnswers={correctAnswers[0]}

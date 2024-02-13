@@ -8,16 +8,25 @@ export function Question({
 	answerFour,
 	onClick,
 	heading,
+	disabled,
 }) {
 	return (
 		<div className={styles.container}>
 			<h2>{heading}</h2>
 			<p> {question}</p>
 			<div className={styles.answersBox}>
-				<button onClick={onClick}>{answerOne}</button>
-				<button onClick={onClick}>{answerTwo}</button>
-				<button onClick={onClick}>{answerThree}</button>
-				<button onClick={onClick}>{answerFour}</button>
+				<button disabled={disabled} onClick={onClick}>
+					{answerOne}
+				</button>
+				<button disabled={disabled} onClick={onClick}>
+					{answerTwo}
+				</button>
+				<button disabled={disabled} onClick={onClick}>
+					{answerThree}
+				</button>
+				<button disabled={disabled} onClick={onClick}>
+					{answerFour}
+				</button>
 			</div>
 		</div>
 	);

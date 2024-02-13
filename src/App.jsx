@@ -88,7 +88,7 @@ function App() {
 					/>
 				)}
 				{showSummary && (
-					<div className={styles.container}>
+					<div className={styles.summaryBox}>
 						<h2>Podsumowanie</h2>
 						<p>Twój wynik to: {userScore}</p>
 						{newQuestions.map(({ question, id }, index) => (

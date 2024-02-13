@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Question } from "./components/Question/Question";
-// import { Questions } from "./utils/Questions";
 import styles from "./App.module.css";
-import { ResultSummary } from "./components/ResultSummary/ResultSummary";
 import { Form } from "./components/Form/Form";
+import { Summary } from "./components/Summary/Summary";
 
 const correctAnswers = ["ryż", "azot", "dyni", "golf", "średniowieczem"];
 const Questions = [
@@ -74,27 +73,6 @@ function App() {
 		}
 	}
 
-	// function addQuestion(
-	// 	newQuestion,
-	// 	answerOne,
-	// 	answerTwo,
-	// 	answerThree,
-	// 	answerFour,
-	// 	answerFive
-	// ) {
-	// 	setNewQuestions((prevQuestions) => [
-	// 		...prevQuestions,
-	// 		{
-	// 			question: newQuestion,
-	// 			answerOne: answerOne,
-	// 			answerTwo: answerTwo,
-	// 			answerThree: answerThree,
-	// 			answerFour: answerFour,
-	// 			answerFive: answerFive,
-	// 		},
-	// 	]);
-	// }
-
 	return (
 		<>
 			<div className={styles.container}>
@@ -110,11 +88,24 @@ function App() {
 					/>
 				)}
 				{showSummary && (
-					<ResultSummary
-						userAnswers={userAnswers}
-						correctAnswers={newCorrectAnswers}
-						score={userScore}
-					/>
+					<div className={styles.container}>
+						<h2>Podsumowanie</h2>
+						<p>Twój wynik to: {userScore}</p>
+						{newQuestions.map(({ question, id }, index) => (
+							<Summary
+								question={question}
+								key={id}
+								id={id}
+								userAnswer={userAnswers[index]}
+								correctAnswer={newCorrectAnswers[index]}
+								className={
+									userAnswers[index] === newCorrectAnswers[index]
+										? styles.correctAnswer
+										: styles.wrongAnswer
+								}
+							/>
+						))}
+					</div>
 				)}
 			</div>
 			<Form
@@ -141,8 +132,8 @@ function App() {
 					});
 
 					setNewCorrectAnswers((prevCorrectAnswer) => [
-						correctAnswer,
 						...prevCorrectAnswer,
+						correctAnswer,
 					]);
 				}}
 			/>

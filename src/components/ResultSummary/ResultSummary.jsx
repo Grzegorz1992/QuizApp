@@ -1,16 +1,16 @@
 import styles from "./ResultSummary.module.css";
-import { Summary } from "../Summary/Summary";
-import { Questions } from "../../utils/Questions";
+// import { Summary } from "../Summary/Summary";
+// import { Questions } from "../../utils/Questions";
 
-
-export function ResultSummary({ userAnswers, correctAnswers, score }) {
-
-
+export function ResultSummary({score}) {
 	return (
 		<div className={styles.container}>
 			<h2>Podsumowanie</h2>
 			<p>Twój wynik to: {score}</p>
-			<Summary
+
+			
+
+			{/* <Summary
 				question={Questions[0].question}
 				className={
 					userAnswers[0] === correctAnswers[0]
@@ -60,7 +60,7 @@ export function ResultSummary({ userAnswers, correctAnswers, score }) {
 				}
 				userAnswers={userAnswers[4]}
 				correctAnswers={correctAnswers[4]}
-			/>
+			/> */}
 		</div>
 	);
 }

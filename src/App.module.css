@@ -1,3 +1,11 @@
 .container {
     padding: 2rem;
 }
+
+.correctAnswer {
+	color: green;
+}
+
+.wrongAnswer {
+	color: red;
+}

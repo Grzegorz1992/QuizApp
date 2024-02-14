@@ -4,6 +4,24 @@ import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { Summary } from "./components/Summary/Summary";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyC2AmXvq2ZgIgmYi6IdHaY6tp1PDYWnjW8",
+	authDomain: "quizcreatorapp.firebaseapp.com",
+	projectId: "quizcreatorapp",
+	storageBucket: "quizcreatorapp.appspot.com",
+	messagingSenderId: "1052841709172",
+	appId: "1:1052841709172:web:6fd48e56b1ffd8922b0b21",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
 function App() {
 	const [changeQuestion, setChangeQuestion] = useState(0);
 	const [handleHeading, setHandleHeading] = useState(1);

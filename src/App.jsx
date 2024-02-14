@@ -1,15 +1,13 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { Question } from "./components/Question/Question";
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { Summary } from "./components/Summary/Summary";
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
 	apiKey: "AIzaSyC2AmXvq2ZgIgmYi6IdHaY6tp1PDYWnjW8",
 	authDomain: "quizcreatorapp.firebaseapp.com",
@@ -19,8 +17,8 @@ const firebaseConfig = {
 	appId: "1:1052841709172:web:6fd48e56b1ffd8922b0b21",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 function App() {
 	const [changeQuestion, setChangeQuestion] = useState(0);
@@ -30,6 +28,16 @@ function App() {
 	const [userScore, setUserScore] = useState(0);
 	const [newQuestions, setNewQuestions] = useState([]);
 	const [newCorrectAnswers, setNewCorrectAnswers] = useState([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const querySnapshot = await getDocs(collection(db, "QuizzApp"));
+			const fetchedQuestions = querySnapshot.docs.map((doc) => doc.data());
+			setNewQuestions(fetchedQuestions);
+		};
+
+		fetchData();
+	}, []);
 
 	function nextQuestion(e) {
 		const userAnswer = e.target.textContent;
@@ -70,7 +78,7 @@ function App() {
 						{newQuestions.map(({ question, id }, index) => (
 							<Summary
 								question={question}
-								key={id}
+								key={`${id}-${index}`}
 								id={id}
 								userAnswer={userAnswers[index]}
 								correctAnswer={newCorrectAnswers[index]}
@@ -84,6 +92,7 @@ function App() {
 					</div>
 				)}
 			</div>
+
 			<Form
 				onQuestionsSubmit={(
 					question,
@@ -93,24 +102,43 @@ function App() {
 					answerFour,
 					correctAnswer
 				) => {
-					setNewQuestions((prevQuestion) => {
-						return [
-							...prevQuestion,
-							{
-								question,
-								answerOne,
-								answerTwo,
-								answerThree,
-								answerFour,
-								id: prevQuestion.length + 1,
-							},
-						];
+					addDoc(collection(db, "QuizzApp"), {
+						question,
+						answerOne,
+						answerTwo,
+						answerThree,
+						answerFour,
+					}).then(() => {
+						setNewQuestions((prevQuestions) => {
+							if (prevQuestions.length > 0 && !prevQuestions[0].question) {
+								prevQuestions[0] = {
+									question,
+									answerOne,
+									answerTwo,
+									answerThree,
+									answerFour,
+									id: prevQuestions.length + 1,
+								};
+								return [...prevQuestions];
+							} else {
+								return [
+									...prevQuestions,
+									{
+										question,
+										answerOne,
+										answerTwo,
+										answerThree,
+										answerFour,
+										id: prevQuestions.length + 1,
+									},
+								];
+							}
+						});
+						setNewCorrectAnswers((prevCorrectAnswers) => [
+							correctAnswer,
+							...prevCorrectAnswers,
+						]);
 					});
-
-					setNewCorrectAnswers((prevCorrectAnswer) => [
-						...prevCorrectAnswer,
-						correctAnswer,
-					]);
 				}}
 			/>
 		</>

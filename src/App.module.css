@@ -24,13 +24,11 @@
 .handleQuestionsBtns {
 	display: flex;
 	gap: 10px;
-	align-self: center;
+	align-self: flex-start;
 }
 
 .appContainer {
 	display: flex;
-	justify-content: center;
-	padding: 5rem;
-	gap: 50px;
-	max-width: 1200px;
+	padding: 4rem;
+	gap: 150px;
 }

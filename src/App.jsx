@@ -28,6 +28,7 @@ function App() {
 	const [userScore, setUserScore] = useState(0);
 	const [newQuestions, setNewQuestions] = useState([]);
 	const [newCorrectAnswers, setNewCorrectAnswers] = useState([]);
+	const [showForm, setShowForm] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -61,7 +62,7 @@ function App() {
 			<div className={styles.appContainer}>
 				{!showSummary && (
 					<Question
-						heading={`pytanie ${handleHeading}`}
+						heading={`Pytanie ${handleHeading}`}
 						question={newQuestions[changeQuestion]?.question}
 						answerOne={newQuestions[changeQuestion]?.answerOne}
 						answerTwo={newQuestions[changeQuestion]?.answerTwo}
@@ -93,58 +94,62 @@ function App() {
 				)}
 
 				<div className={styles.handleQuestionsBtns}>
-					<button className={styles.showForm}></button>
-					<button className={styles.deleteQuestion}></button>
+					<button className={styles.deleteQuestion}>Usuń pytanie</button>
+					<button className={styles.showForm} onClick={() => setShowForm(true)}>
+						Dodaj pytanie
+					</button>
 				</div>
 
-				<Form
-					onQuestionsSubmit={(
-						question,
-						answerOne,
-						answerTwo,
-						answerThree,
-						answerFour,
-						correctAnswer
-					) => {
-						addDoc(collection(db, "QuizzApp"), {
+				{showForm && (
+					<Form
+						onQuestionsSubmit={(
 							question,
 							answerOne,
 							answerTwo,
 							answerThree,
 							answerFour,
-						}).then(() => {
-							setNewQuestions((prevQuestions) => {
-								if (prevQuestions.length > 0 && !prevQuestions[0].question) {
-									prevQuestions[0] = {
-										question,
-										answerOne,
-										answerTwo,
-										answerThree,
-										answerFour,
-										id: prevQuestions.length + 1,
-									};
-									return [...prevQuestions];
-								} else {
-									return [
-										...prevQuestions,
-										{
+							correctAnswer
+						) => {
+							addDoc(collection(db, "QuizzApp"), {
+								question,
+								answerOne,
+								answerTwo,
+								answerThree,
+								answerFour,
+							}).then(() => {
+								setNewQuestions((prevQuestions) => {
+									if (prevQuestions.length > 0 && !prevQuestions[0].question) {
+										prevQuestions[0] = {
 											question,
 											answerOne,
 											answerTwo,
 											answerThree,
 											answerFour,
 											id: prevQuestions.length + 1,
-										},
-									];
-								}
+										};
+										return [...prevQuestions];
+									} else {
+										return [
+											{
+												question,
+												answerOne,
+												answerTwo,
+												answerThree,
+												answerFour,
+												id: prevQuestions.length + 1,
+											},
+											...prevQuestions,
+										];
+									}
+								});
+								setNewCorrectAnswers((prevCorrectAnswers) => [
+									correctAnswer,
+									...prevCorrectAnswers,
+								]);
 							});
-							setNewCorrectAnswers((prevCorrectAnswers) => [
-								correctAnswer,
-								...prevCorrectAnswers,
-							]);
-						});
-					}}
-				/>
+						}}
+					/>
+				)}
 			</div>
 		</>
 	);

@@ -93,6 +93,11 @@ function App() {
 				)}
 			</div>
 
+			<div className={styles.handleQuestionsBtns}>
+				<button className={styles.showForm}></button>
+				<button className={styles.deleteQuestion}></button>
+			</div>
+
 			<Form
 				onQuestionsSubmit={(
 					question,

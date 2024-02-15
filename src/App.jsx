@@ -58,7 +58,7 @@ function App() {
 
 	return (
 		<>
-			<div className={styles.container}>
+			<div className={styles.appContainer}>
 				{!showSummary && (
 					<Question
 						heading={`pytanie ${handleHeading}`}
@@ -91,61 +91,61 @@ function App() {
 						))}
 					</div>
 				)}
-			</div>
 
-			<div className={styles.handleQuestionsBtns}>
-				<button className={styles.showForm}></button>
-				<button className={styles.deleteQuestion}></button>
-			</div>
+				<div className={styles.handleQuestionsBtns}>
+					<button className={styles.showForm}></button>
+					<button className={styles.deleteQuestion}></button>
+				</div>
 
-			<Form
-				onQuestionsSubmit={(
-					question,
-					answerOne,
-					answerTwo,
-					answerThree,
-					answerFour,
-					correctAnswer
-				) => {
-					addDoc(collection(db, "QuizzApp"), {
+				<Form
+					onQuestionsSubmit={(
 						question,
 						answerOne,
 						answerTwo,
 						answerThree,
 						answerFour,
-					}).then(() => {
-						setNewQuestions((prevQuestions) => {
-							if (prevQuestions.length > 0 && !prevQuestions[0].question) {
-								prevQuestions[0] = {
-									question,
-									answerOne,
-									answerTwo,
-									answerThree,
-									answerFour,
-									id: prevQuestions.length + 1,
-								};
-								return [...prevQuestions];
-							} else {
-								return [
-									...prevQuestions,
-									{
+						correctAnswer
+					) => {
+						addDoc(collection(db, "QuizzApp"), {
+							question,
+							answerOne,
+							answerTwo,
+							answerThree,
+							answerFour,
+						}).then(() => {
+							setNewQuestions((prevQuestions) => {
+								if (prevQuestions.length > 0 && !prevQuestions[0].question) {
+									prevQuestions[0] = {
 										question,
 										answerOne,
 										answerTwo,
 										answerThree,
 										answerFour,
 										id: prevQuestions.length + 1,
-									},
-								];
-							}
+									};
+									return [...prevQuestions];
+								} else {
+									return [
+										...prevQuestions,
+										{
+											question,
+											answerOne,
+											answerTwo,
+											answerThree,
+											answerFour,
+											id: prevQuestions.length + 1,
+										},
+									];
+								}
+							});
+							setNewCorrectAnswers((prevCorrectAnswers) => [
+								correctAnswer,
+								...prevCorrectAnswers,
+							]);
 						});
-						setNewCorrectAnswers((prevCorrectAnswers) => [
-							correctAnswer,
-							...prevCorrectAnswers,
-						]);
-					});
-				}}
-			/>
+					}}
+				/>
+			</div>
 		</>
 	);
 }

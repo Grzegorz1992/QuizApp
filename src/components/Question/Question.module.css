@@ -1,16 +1,17 @@
 .container {
 	padding: 2rem;
 	background-color: #f2efe5;
-	width: 50%;
 	border-radius: 12px;
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+	height: 50%;
+	width: max-content;
+	
 }
 .answersBox {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	padding: 1rem;
-	max-width: 400px;
 }
 
 button {

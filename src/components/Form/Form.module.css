@@ -39,7 +39,7 @@ input {
 	transition: all 0.3s;
 	cursor: pointer;
 	align-self: flex-start;
-
+	
 	&:hover {
 		color: white;
 		background-color: #4c4b4b;
@@ -50,5 +50,7 @@ input {
 	align-self: flex-end;
 	border-radius: 50%;
 	font-size: 1.4rem;
+	font-weight: bold;
+	
 }
 

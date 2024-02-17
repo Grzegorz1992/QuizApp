@@ -27,7 +27,6 @@ function App() {
 	const [userAnswers, setUserAnswers] = useState([]);
 	const [userScore, setUserScore] = useState(0);
 	const [newQuestions, setNewQuestions] = useState([]);
-	const [newCorrectAnswers, setNewCorrectAnswers] = useState([]);
 	const [showForm, setShowForm] = useState(false);
 
 	useEffect(() => {
@@ -50,7 +49,8 @@ function App() {
 			setShowSummary(true);
 		}
 
-		const isCorrectAnswer = userAnswer === newCorrectAnswers[changeQuestion];
+		const isCorrectAnswer =
+			userAnswer === newQuestions[changeQuestion]?.correctAnswer;
 
 		if (isCorrectAnswer) {
 			setUserScore((prevScore) => prevScore + 1);
@@ -82,9 +82,9 @@ function App() {
 								key={`${id}-${index}`}
 								id={id}
 								userAnswer={userAnswers[index]}
-								correctAnswer={newCorrectAnswers[index]}
+								correctAnswer={newQuestions[index]?.correctAnswer}
 								className={
-									userAnswers[index] === newCorrectAnswers[index]
+									userAnswers[index] === newQuestions[index]?.correctAnswer
 										? styles.correctAnswer
 										: styles.wrongAnswer
 								}
@@ -116,35 +116,19 @@ function App() {
 								answerTwo,
 								answerThree,
 								answerFour,
+								correctAnswer, // Dodanie poprawnej odpowiedzi do dokumentu
 							}).then(() => {
-								setNewQuestions((prevQuestions) => {
-									if (prevQuestions.length > 0 && !prevQuestions[0].question) {
-										prevQuestions[0] = {
-											question,
-											answerOne,
-											answerTwo,
-											answerThree,
-											answerFour,
-											id: prevQuestions.length + 1,
-										};
-										return [...prevQuestions];
-									} else {
-										return [
-											{
-												question,
-												answerOne,
-												answerTwo,
-												answerThree,
-												answerFour,
-												id: prevQuestions.length + 1,
-											},
-											...prevQuestions,
-										];
-									}
-								});
-								setNewCorrectAnswers((prevCorrectAnswers) => [
-									correctAnswer,
-									...prevCorrectAnswers,
+								setNewQuestions((prevQuestions) => [
+									...prevQuestions,
+									{
+										question,
+										answerOne,
+										answerTwo,
+										answerThree,
+										answerFour,
+										correctAnswer,
+										id: prevQuestions.length + 1,
+									},
 								]);
 							});
 						}}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Form.module.css";
 
-export function Form({ onQuestionsSubmit }) {
+export function Form({ onQuestionsSubmit, onClick }) {
 	const [questionValue, setQuestionValue] = useState("");
 	const [answerOneValue, setAnswerOneValue] = useState("");
 	const [answerTwoValue, setAnswerTwoValue] = useState("");
@@ -36,7 +36,7 @@ export function Form({ onQuestionsSubmit }) {
 	}
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
-				<button className={styles.closeFormbtn}>x</button>
+				<button onClick={onClick} className={styles.closeFormbtn}>x</button>
 			<div className={styles.formBox}>
 				<div>
 					<label htmlFor="question">Pytanie:</label>

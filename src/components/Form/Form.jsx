@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Form.module.css";
 
-export function Form({ onQuestionsSubmit, onClick }) {
+export function Form({ onQuestionsSubmit }) {
 	const [questionValue, setQuestionValue] = useState("");
 	const [answerOneValue, setAnswerOneValue] = useState("");
 	const [answerTwoValue, setAnswerTwoValue] = useState("");
@@ -120,7 +120,18 @@ export function Form({ onQuestionsSubmit, onClick }) {
 					}}
 				/>
 			</div>
-			<button className={styles.saveForm} onClick={onClick} type="submit">
+			<button
+				disabled={
+					(questionValue === "",
+					answerOneValue === "",
+					answerTwoValue === "",
+					answerThreeValue === "",
+					answerFourValue === "",
+					correctAnswerValue === "")
+				}
+				className={styles.saveForm}
+				type="submit"
+			>
 				Zapisz
 			</button>
 		</form>

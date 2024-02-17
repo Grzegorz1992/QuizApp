@@ -1,9 +1,9 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 20px;
 	background-color: #f2efe5;
-	padding: 4rem;
+	padding: 2rem;
 	border-radius: 12px;
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 	align-self: center;
@@ -16,8 +16,8 @@
 	color: white;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
-	font-size: 2rem;
+	gap: 5px;
+	font-size: 1.6rem;
 	border-radius: 12px;
 }
 
@@ -27,7 +27,8 @@ input {
 	outline: none;
 }
 
-.saveForm {
+.saveForm,
+.closeFormbtn {
 	color: black;
 	background-color: #b4b4b8;
 	padding: 1rem;
@@ -37,10 +38,17 @@ input {
 	box-shadow: rgba(0, 0, 0, 0.6) 1.95px 1.95px 2.6px;
 	transition: all 0.3s;
 	cursor: pointer;
-	align-self: center;
+	align-self: flex-start;
 
 	&:hover {
 		color: white;
 		background-color: #4c4b4b;
 	}
 }
+
+.closeFormbtn {
+	align-self: flex-end;
+	border-radius: 50%;
+	font-size: 1.4rem;
+}
+

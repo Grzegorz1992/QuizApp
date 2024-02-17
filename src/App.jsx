@@ -69,7 +69,7 @@ function App() {
 						answerThree={newQuestions[changeQuestion]?.answerThree}
 						answerFour={newQuestions[changeQuestion]?.answerFour}
 						onClick={nextQuestion}
-						disabled={newQuestions.length < 0}
+						disabled={newQuestions.length === 0}
 					/>
 				)}
 				{showSummary && (

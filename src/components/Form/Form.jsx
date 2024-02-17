@@ -36,6 +36,7 @@ export function Form({ onQuestionsSubmit }) {
 	}
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
+				<button className={styles.closeFormbtn}>x</button>
 			<div className={styles.formBox}>
 				<div>
 					<label htmlFor="question">Pytanie:</label>

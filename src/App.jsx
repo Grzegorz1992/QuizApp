@@ -47,7 +47,7 @@ function App() {
 		};
 
 		fetchData();
-	}, []);
+	}, [newQuestions]);
 
 	function nextQuestion(e) {
 		const userAnswer = e.target.textContent;
@@ -115,7 +115,13 @@ function App() {
 					</button>
 				</div>
 				{showDeleteQuestionForm && (
-					<DeleteQuestion onClick={() => setShowDeleteQuestionForm(false)} />
+					<DeleteQuestion
+						onClick={() => setShowDeleteQuestionForm(false)}
+						db={db}
+						questions={newQuestions}
+						setQuestions={setNewQuestions}
+						
+					/>
 				)}
 
 				{showForm && (

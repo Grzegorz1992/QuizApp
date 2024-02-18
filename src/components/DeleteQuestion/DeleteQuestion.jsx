@@ -1,16 +1,37 @@
 import { useState } from "react";
 import styles from "./DeleteQuestion.module.css";
+import { deleteDoc, doc, getDocs, collection } from "firebase/firestore";
 
-export function DeleteQuestion({ onClick, onQuestionDelete }) {
+export function DeleteQuestion({ onClick, questions, setQuestions, db }) {
 	const [inputValue, setInputValue] = useState("");
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 
-		const inputValue = inputValue;
-		setInputValue("");
+		const questionToDelete = inputValue.trim();
 
-		onQuestionDelete(inputValue);
+		if (questionToDelete) {
+			try {
+				const querySnapshot = await getDocs(collection(db, "QuizzApp"));
+				const docToDelete = querySnapshot.docs.find(
+					(doc) => doc.data().question === questionToDelete
+				);
+				if (docToDelete) {
+					await deleteDoc(doc(db, "QuizzApp", docToDelete.id));
+					const updatedQuestions = questions.filter(
+						(question) => question.id !== docToDelete.id
+					);
+					setQuestions(updatedQuestions);
+				} else {
+					alert("Nie znaleziono pytania o podanej treści.");
+				}
+			} catch (error) {
+				console.error("Błąd podczas usuwania pytania:", error);
+				alert("Wystąpił błąd podczas usuwania pytania.");
+			}
+
+			setInputValue("");
+		}
 	}
 
 	return (
@@ -33,7 +54,7 @@ export function DeleteQuestion({ onClick, onQuestionDelete }) {
 				/>
 			</div>
 			<button
-				disabled={inputValue === ""}
+				disabled={inputValue.trim() === ""}
 				className={styles.saveForm}
 				type="submit"
 			>

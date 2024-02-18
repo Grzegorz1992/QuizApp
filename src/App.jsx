@@ -6,7 +6,14 @@ import { Form } from "./components/Form/Form";
 import { Summary } from "./components/Summary/Summary";
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+	getFirestore,
+	collection,
+	addDoc,
+	getDocs,
+	query,
+	orderBy,
+} from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyC2AmXvq2ZgIgmYi6IdHaY6tp1PDYWnjW8",
@@ -31,7 +38,8 @@ function App() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const querySnapshot = await getDocs(collection(db, "QuizzApp"));
+			const q = query(collection(db, "QuizzApp"), orderBy("order"));
+			const querySnapshot = await getDocs(q);
 			const fetchedQuestions = querySnapshot.docs.map((doc) => doc.data());
 			setNewQuestions(fetchedQuestions);
 		};
@@ -116,7 +124,8 @@ function App() {
 								answerTwo,
 								answerThree,
 								answerFour,
-								correctAnswer, // Dodanie poprawnej odpowiedzi do dokumentu
+								correctAnswer,
+								order: newQuestions.length + 1,
 							}).then(() => {
 								setNewQuestions((prevQuestions) => [
 									...prevQuestions,

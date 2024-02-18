@@ -114,6 +114,9 @@ function App() {
 						Dodaj pytanie
 					</button>
 				</div>
+				{showDeleteQuestionForm && (
+					<DeleteQuestion onClick={() => setShowDeleteQuestionForm(false)} />
+				)}
 
 				{showForm && (
 					<Form
@@ -150,9 +153,6 @@ function App() {
 							});
 						}}
 					/>
-				)}
-				{showDeleteQuestionForm && (
-					<DeleteQuestion onClick={() => setShowDeleteQuestionForm(false)} />
 				)}
 			</div>
 		</>

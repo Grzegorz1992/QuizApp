@@ -92,7 +92,12 @@ function App() {
 					<div className={styles.summaryBox}>
 						<button
 							className={styles.closeSummary}
-							onClick={() => setShowSummary(false)}
+							onClick={() => {
+								setShowSummary(false);
+								setChangeQuestion(0);
+								setHandleHeading(1);
+								setUserScore(0);
+							}}
 						>
 							x
 						</button>

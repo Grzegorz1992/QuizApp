@@ -4,6 +4,7 @@ import { Question } from "./components/Question/Question";
 import styles from "./App.module.css";
 import { Form } from "./components/Form/Form";
 import { Summary } from "./components/Summary/Summary";
+import { DeleteQuestion } from "./components/DeleteQuestion/DeleteQuestion";
 
 import { initializeApp } from "firebase/app";
 import {
@@ -35,6 +36,7 @@ function App() {
 	const [userScore, setUserScore] = useState(0);
 	const [newQuestions, setNewQuestions] = useState([]);
 	const [showForm, setShowForm] = useState(false);
+	const [showDeleteQuestionForm, setShowDeleteQuestionForm] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -102,7 +104,12 @@ function App() {
 				)}
 
 				<div className={styles.handleQuestionsBtns}>
-					<button className={styles.deleteQuestion}>Usuń pytanie</button>
+					<button
+						className={styles.deleteQuestion}
+						onClick={() => setShowDeleteQuestionForm(true)}
+					>
+						Usuń pytanie
+					</button>
 					<button className={styles.showForm} onClick={() => setShowForm(true)}>
 						Dodaj pytanie
 					</button>
@@ -110,6 +117,7 @@ function App() {
 
 				{showForm && (
 					<Form
+						onClick={() => setShowForm(false)}
 						onQuestionsSubmit={(
 							question,
 							answerOne,
@@ -142,6 +150,9 @@ function App() {
 							});
 						}}
 					/>
+				)}
+				{showDeleteQuestionForm && (
+					<DeleteQuestion onClick={() => setShowDeleteQuestionForm(false)} />
 				)}
 			</div>
 		</>

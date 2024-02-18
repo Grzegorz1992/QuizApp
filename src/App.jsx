@@ -69,6 +69,12 @@ function App() {
 
 	return (
 		<>
+			<header>
+				<h1>QuizzApp</h1>
+				<p>Stwórz swój własny quiz!</p>
+				<p>Dodawaj i usuwaj ile pytań chcesz!</p>
+			</header>
+
 			<div className={styles.appContainer}>
 				{!showSummary && newQuestions.length > 0 && (
 					<Question
@@ -84,6 +90,12 @@ function App() {
 				)}
 				{showSummary && (
 					<div className={styles.summaryBox}>
+						<button
+							className={styles.closeSummary}
+							onClick={() => setShowSummary(false)}
+						>
+							x
+						</button>
 						<h2>Podsumowanie</h2>
 						<p>Twój wynik to: {userScore}</p>
 						{newQuestions.map(({ question, id }, index) => (
@@ -105,6 +117,7 @@ function App() {
 
 				<div className={styles.handleQuestionsBtns}>
 					<button
+						disabled={newQuestions.length === 0}
 						className={styles.deleteQuestion}
 						onClick={() => setShowDeleteQuestionForm(true)}
 					>
@@ -120,7 +133,6 @@ function App() {
 						db={db}
 						questions={newQuestions}
 						setQuestions={setNewQuestions}
-						
 					/>
 				)}
 

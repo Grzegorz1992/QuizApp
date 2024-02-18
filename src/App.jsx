@@ -68,7 +68,7 @@ function App() {
 	return (
 		<>
 			<div className={styles.appContainer}>
-				{!showSummary && (
+				{!showSummary && newQuestions.length > 0 && (
 					<Question
 						heading={`Pytanie ${handleHeading}`}
 						question={newQuestions[changeQuestion]?.question}

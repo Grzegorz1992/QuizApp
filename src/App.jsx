@@ -69,10 +69,9 @@ function App() {
 
 	return (
 		<>
-			<header>
-				<h1>QuizzApp</h1>
-				<p>Stwórz swój własny quiz!</p>
-				<p>Dodawaj i usuwaj ile pytań chcesz!</p>
+			<header className={styles.header}>
+				<h1 className={styles.heading}>QuizzApp</h1>
+				<p className={styles.headingText}>Stwórz swój własny quiz!</p>
 			</header>
 
 			<div className={styles.appContainer}>
@@ -102,7 +101,7 @@ function App() {
 							x
 						</button>
 						<h2>Podsumowanie</h2>
-						<p>Twój wynik to: {userScore}</p>
+						<p>Twoj wynik to: {userScore}</p>
 						{newQuestions.map(({ question, id }, index) => (
 							<Summary
 								question={question}

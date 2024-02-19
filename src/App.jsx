@@ -14,6 +14,8 @@ import {
 	getDocs,
 	query,
 	orderBy,
+	deleteDoc,
+	doc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -47,7 +49,7 @@ function App() {
 		};
 
 		fetchData();
-	}, [newQuestions]);
+	}, []);
 
 	function nextQuestion(e) {
 		const userAnswer = e.target.textContent;
@@ -66,6 +68,46 @@ function App() {
 			setUserScore((prevScore) => prevScore + 1);
 		}
 	}
+
+	const handleFormSubmit = (
+		question,
+		answerOne,
+		answerTwo,
+		answerThree,
+		answerFour,
+		correctAnswer
+	) => {
+		addDoc(collection(db, "QuizzApp"), {
+			question,
+			answerOne,
+			answerTwo,
+			answerThree,
+			answerFour,
+			correctAnswer,
+			order: newQuestions.length + 1,
+		}).then(() => {
+			const q = query(collection(db, "QuizzApp"), orderBy("order"));
+			getDocs(q).then((querySnapshot) => {
+				const fetchedQuestions = querySnapshot.docs.map((doc) => doc.data());
+				setNewQuestions(fetchedQuestions);
+				setUserAnswers([]);
+				setUserScore(0);
+			});
+		});
+	};
+
+	const handleDeleteQuestion = async (questionId) => {
+		await deleteDoc(doc(db, "QuizzApp", questionId));
+		const q = query(collection(db, "QuizzApp"), orderBy("order"));
+		const querySnapshot = await getDocs(q);
+		const fetchedQuestions = querySnapshot.docs.map((doc) => ({
+			...doc.data(),
+			id: doc.id,
+		}));
+		setNewQuestions(fetchedQuestions);
+		setUserAnswers([]);
+		setUserScore(0);
+	};
 
 	return (
 		<>
@@ -101,7 +143,7 @@ function App() {
 							x
 						</button>
 						<h2>Podsumowanie</h2>
-						<p>Twoj wynik to: {userScore}</p>
+						<p>Twoj wynik to: {userScore}/{newQuestions.length}</p>
 						{newQuestions.map(({ question, id }, index) => (
 							<Summary
 								question={question}
@@ -134,46 +176,17 @@ function App() {
 				{showDeleteQuestionForm && (
 					<DeleteQuestion
 						onClick={() => setShowDeleteQuestionForm(false)}
-						db={db}
 						questions={newQuestions}
 						setQuestions={setNewQuestions}
+						db={db}
+						onDelete={handleDeleteQuestion}
 					/>
 				)}
 
 				{showForm && (
 					<Form
 						onClick={() => setShowForm(false)}
-						onQuestionsSubmit={(
-							question,
-							answerOne,
-							answerTwo,
-							answerThree,
-							answerFour,
-							correctAnswer
-						) => {
-							addDoc(collection(db, "QuizzApp"), {
-								question,
-								answerOne,
-								answerTwo,
-								answerThree,
-								answerFour,
-								correctAnswer,
-								order: newQuestions.length + 1,
-							}).then(() => {
-								setNewQuestions((prevQuestions) => [
-									...prevQuestions,
-									{
-										question,
-										answerOne,
-										answerTwo,
-										answerThree,
-										answerFour,
-										correctAnswer,
-										id: prevQuestions.length + 1,
-									},
-								]);
-							});
-						}}
+						onQuestionsSubmit={handleFormSubmit}
 					/>
 				)}
 			</div>

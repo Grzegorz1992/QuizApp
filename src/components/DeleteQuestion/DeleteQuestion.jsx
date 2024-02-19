@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./DeleteQuestion.module.css";
 import { deleteDoc, doc, getDocs, collection } from "firebase/firestore";
 
-export function DeleteQuestion({ onClick, questions, setQuestions, db }) {
+export function DeleteQuestion({ onClick, db, onDelete }) {
 	const [inputValue, setInputValue] = useState("");
 
 	async function handleSubmit(e) {
@@ -18,10 +18,7 @@ export function DeleteQuestion({ onClick, questions, setQuestions, db }) {
 				);
 				if (docToDelete) {
 					await deleteDoc(doc(db, "QuizzApp", docToDelete.id));
-					const updatedQuestions = questions.filter(
-						(question) => question.id !== docToDelete.id
-					);
-					setQuestions(updatedQuestions);
+					onDelete(docToDelete.id);
 				} else {
 					alert("Nie znaleziono pytania o podanej treści.");
 				}

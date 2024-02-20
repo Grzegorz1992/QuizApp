@@ -8,9 +8,15 @@
 	border-radius: 12px;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
-	
 }
 
 .correctAnswer {
 	color: green;
+}
+
+@media only screen and (max-width: 1600px) {
+	.summary {
+		gap: 8px;
+		padding: 0.8rem;
+	}
 }

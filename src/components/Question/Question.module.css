@@ -39,3 +39,28 @@ h2 {
 p {
 	font-size: 1.4rem;
 }
+
+@media only screen and (max-width: 1600px) {
+	.container {
+		padding: 1.6rem;
+	}
+	.answersBox {
+		gap: 8px;
+		padding: 0.8rem;
+	}
+
+	button {
+		padding: 0.6rem;
+		padding-right: 1.6rem;
+
+		font-size: 0.8rem;
+	}
+
+	h2 {
+		font-size: 1.4rem;
+	}
+
+	p {
+		font-size: 1.2rem;
+	}
+}

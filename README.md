@@ -38,6 +38,10 @@ QuizzApp is a web application built with React and Firebase, allowing users to c
 
 You can try QuizzApp live [here](https://quizzcreator.netlify.app).
 
+## Usage Notes
+
+Please note that QuizzApp is optimized for desktop use only and may not provide an optimal experience on mobile devices.
+
 ## Contributing
 
 Contributions to QuizzApp are welcome! To contribute, follow these steps:
@@ -52,3 +56,4 @@ Contributions to QuizzApp are welcome! To contribute, follow these steps:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+

@@ -1,10 +1,10 @@
 .container {
-	padding: 2rem;
 	background-color: #f2efe5;
+	padding: 2rem;
+	width: max-content;
+	height: 50%;
 	border-radius: 12px;
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-	height: 50%;
-	width: max-content;
 }
 .answersBox {
 	display: flex;
@@ -16,15 +16,15 @@
 button {
 	color: white;
 	background-color: #4c4b4b;
-	padding: 1rem;
+	padding: 0.8rem;
 	padding-right: 2rem;
 	width: max-content;
-	font-size: 1.4rem;
+	font-size: 1rem;
 	border: none;
 	border-radius: 12px;
 	box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-	transition: all 0.3s;
 	cursor: pointer;
+	transition: all 0.3s;
 
 	&:hover {
 		color: black;
@@ -33,9 +33,9 @@ button {
 }
 
 h2 {
-	font-size: 2rem;
+	font-size: 1.6rem;
 }
 
 p {
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 }

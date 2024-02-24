@@ -26,13 +26,10 @@ QuizzApp is a web application built with React and Firebase, allowing users to c
 - **Viewing Summary**: After completing the quiz, click on "Podsumowanie" to view a summary of your results.
 - **Deleting a Question**: Click on "Usuń pytanie" to remove an existing question from the quiz.
 
-## Technologies
+## Used Technologies
 
-![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white)
-![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![CSS](https://img.shields.io/badge/-CSS-1572B6?logo=css3&logoColor=white)
-![HTML](https://img.shields.io/badge/-HTML-E34F26?logo=html5&logoColor=white)
-![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black)
+ <img src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" width="50" height="50"> <img src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="JavaScript" width="50" height="50">  <img src="https://github.com/marwin1991/profile-technology-icons/assets/62091613/b40892ef-efb8-4b0e-a6b5-d1cfc2f3fc35" alt="CSS3" width="50" height="50"> <img src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" alt="Vite" width="50" height="50">
+<img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" alt="HTML5" width="50" height="50">
 
 ## Demo
 
